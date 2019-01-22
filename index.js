@@ -7,6 +7,32 @@ function createStore() {
 
 	let state // variável que armazena o estado
 
+	let listeners = []
+
 	const getState = () => state // função que retorna o estado
-	
+
+	const subscribe = (listener) => {
+		listeners.push(listener)
+
+		return () => {
+			listeners = listeners.filter( (l) => l !== listener )
+		}
+	}
+
+	return {
+		getState,
+		subscribe
+	}	
 }
+
+const store = createStore()
+
+store.subscribe( () => {
+	console.log('The new state is: ', store)
+} )
+
+const unsubscribe = store.subscribe( () => {
+	console.log('The store changes')
+} )
+
+unsubscribe()
