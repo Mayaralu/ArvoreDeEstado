@@ -1,9 +1,27 @@
 // App Code
 function todos (state = [], action){ // pure function
-	if (action.type == 'ADD_TODO'){
+	/*if (action.type === 'ADD_TODO'){
 		return state.concat([action.todo])
+	}else if(action.type === 'REMOVE_TODO'){
+		return state.filter( (todo) => todo.id !== action.id )
+	}else if(action.type === 'TOGGLE_TODO'){
+		return state.map( (todo) => todo.id !== action.id ? todo : 
+			Object.assign({}, todo, {complete: !todo.complete}) )
+	}else{
+		return state
+	}*/
+	switch(action.type){
+		case 'ADD_TODO':
+			return state.concat([action.todo])
+		case 'REMOVE_TODO':
+			return state.filter( (todo) => todo.id !== action.id )
+		case 'TOGGLE_TODO':
+			return state.map( (todo) => todo.id !== action.id ? todo : 
+			Object.assign({}, todo, {complete: !todo.complete}) )
+		default:
+			return state
 	}
-	return state
+	
 }
 
 // Library Code
