@@ -39,16 +39,27 @@ function createStore(reducer) {
 	}	
 }
 
-const store = createStore()
+const store = createStore(todos)
 
 store.subscribe( () => {
-	console.log('The new state is: ', store)
+	console.log('The new state is: ', store.getState())
 } )
 
 const unsubscribe = store.subscribe( () => {
 	console.log('The store changes')
 } )
 
-unsubscribe()
-
 const store = createStore(todos)
+
+store.subscribe( () => {
+	console.log('The new state is: ', store.getState())
+} )
+
+store.dispatch( {
+	type: 'ADD_TODO',
+	todo: {
+		id: 0,
+		name: 'Learn Redux',
+		complete: false
+	}
+} )
