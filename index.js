@@ -3,10 +3,10 @@ function todos (state = [], action){ // pure function
 	/*if (action.type === 'ADD_TODO'){
 		return state.concat([action.todo])
 	}else if(action.type === 'REMOVE_TODO'){
-		return state.filter( (todo) => todo.id !== action.id )
+		return state.filter( (todo) => todo.id !== action.id ) 
 	}else if(action.type === 'TOGGLE_TODO'){
-		return state.map( (todo) => todo.id !== action.id ? todo : 
-			Object.assign({}, todo, {complete: !todo.complete}) )
+		return state.map( (todo) => todo.id !== action.id ? todo :  
+			Object.assign({}, todo, {complete: !todo.complete}) ) 
 	}else{
 		return state
 	}*/
@@ -14,14 +14,30 @@ function todos (state = [], action){ // pure function
 		case 'ADD_TODO':
 			return state.concat([action.todo])
 		case 'REMOVE_TODO':
-			return state.filter( (todo) => todo.id !== action.id )
+			// retorna um novo estado (um array) apenas com aqueles itens da lista
+			// de afazeres cujas id's não correspondem à id da tarefa que queremos remover
+			return state.filter( (todo) => todo.id !== action.id ) 
 		case 'TOGGLE_TODO':
+			// Para alternar a marcação de tarefa completa/incompleta, queríamos mudar o 
+			//valor da propriedade complete em qualquer id que fosse passada com a ação correspondente.
+			// // Mapeamos o estado como um todo e, se todo.id fosse correspondente à action.id, 
+			//usamos Object.assign() para retornar um novo objeto com propriedades mescladas
 			return state.map( (todo) => todo.id !== action.id ? todo : 
 			Object.assign({}, todo, {complete: !todo.complete}) )
 		default:
 			return state
 	}
 	
+}
+function goals (state = [], action){
+	switch(action.type){
+		case 'ADD_GOAL':
+			return state.concat([action.goal])
+		case 'REMOVE_GOAL':
+			return state.filter( (goal) => goal.id !== action.id )
+		default:
+			return state
+	}
 }
 
 // Library Code
